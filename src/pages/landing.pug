@@ -14,14 +14,33 @@ include ../mixins/icons
       //- Pug loader currently does not handle webpack alias so we will use relative path here
       include ../assets/images/title.svg
 
-    .slot
-      .slot__outer
-        .slot__inner
-          .slot__shadow
-          #reel.reel
+    .slots-container
+      .slot
+        .slot__outer
+          .slot__inner
+            .slot__shadow
+              #reel.reel
 
-      #sunburst.sunburst
-        img(src="~@images/sunburst.svg" alt="sunburst")
+        #sunburst.sunburst
+          img(src="~@images/sunburst.svg" alt="sunburst")
+
+      .slot
+        .slot__outer
+          .slot__inner
+            .slot__shadow
+              #reel.reel
+
+        #sunburst.sunburst
+          img(src="~@images/sunburst.svg" alt="sunburst")
+
+      .slot
+        .slot__outer
+          .slot__inner
+            .slot__shadow
+              #reel.reel
+
+        #sunburst.sunburst
+          img(src="~@images/sunburst.svg" alt="sunburst")
 
     button#draw-button.solid-button Draw
 
@@ -47,4 +66,5 @@ include ../mixins/icons
       div.settings__panel__group
         button#settings-save.solid-button.solid-button Save
         button#settings-close.solid-button.solid-button--danger Discard and close
+
 
