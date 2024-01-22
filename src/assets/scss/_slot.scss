@@ -39,6 +39,28 @@
   }
 }
 
+.slots-header-container {
+  text-align: center;
+  position: absolute;
+  top: 30%; // Adjust as needed to move them further upward
+  width: 100%;
+  display: flex;
+  justify-content: space-between; // Align Left, Center, and Right text
+
+  .slot-text-left,
+  .slot-text-center,
+  .slot-text-right {
+    text-align: center; // Adjust text alignment as needed
+    flex: 1;
+    font-size: 25px;
+  }
+
+  .slot-text-center {
+    margin-left: 10px; // Adjust as needed
+    margin-right: 10px; // Adjust as needed
+  }
+}
+
 .slots-container {
   display: flex;
   justify-content: space-around; // Adjust the alignment as needed

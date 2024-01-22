@@ -14,6 +14,16 @@ include ../mixins/icons
       //- Pug loader currently does not handle webpack alias so we will use relative path here
       include ../assets/images/title.svg
 
+    .slots-header-container
+      .slot-text-left
+        p Song Title
+
+      .slot-text-center
+        p Genre
+
+      .slot-text-right
+        p Style
+
     .slots-container
       .slot
         .slot__outer
@@ -42,7 +52,7 @@ include ../mixins/icons
         #sunburst.sunburst
           img(src="~@images/sunburst.svg" alt="sunburst")
 
-    button#draw-button.solid-button Draw
+    button#draw-button.solid-button Run!
 
   #settings.settings
     #settings-panel.settings__panel

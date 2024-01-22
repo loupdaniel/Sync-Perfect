@@ -28,10 +28,10 @@ $title-margin-bottom: 4.875rem;
 $reel-item-height: 7.5rem;
 
 // slot
-$slot-width: 62.5rem;
-$slot-height: 14.375rem;
-$slot-border-radius: 1.25rem;
-$slot-border-width: 1.625rem;
+$slot-width: 31.25rem;
+$slot-height: 7.18725rem;
+$slot-border-radius: 0.625rem;
+$slot-border-width: 0.8125rem;
 $slot-inner-padding: (
     $slot-height - ($slot-border-width * 2) - $reel-item-height
   ) / 2;
