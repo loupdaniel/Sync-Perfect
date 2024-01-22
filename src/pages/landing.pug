@@ -14,43 +14,45 @@ include ../mixins/icons
       //- Pug loader currently does not handle webpack alias so we will use relative path here
       include ../assets/images/title.svg
 
-    .slots-header-container
-      .slot-text-left
-        p Song Title
-
-      .slot-text-center
-        p Genre
-
-      .slot-text-right
-        p Style
-
     .slots-container
-      .slot
-        .slot__outer
-          .slot__inner
-            .slot__shadow
-              #reel.reel
+      .slot-group
+        .slot-text
+          p Song Title
 
-        #sunburst.sunburst
-          img(src="~@images/sunburst.svg" alt="sunburst")
+        .slot
+          .slot__outer
+            .slot__inner
+              .slot__shadow
+                #reel.reel
 
-      .slot
-        .slot__outer
-          .slot__inner
-            .slot__shadow
-              #reel.reel
+          #sunburst.sunburst
+            img(src="~@images/sunburst.svg" alt="sunburst")
 
-        #sunburst.sunburst
-          img(src="~@images/sunburst.svg" alt="sunburst")
+      .slot-group
+        .slot-text
+          p Genre
 
-      .slot
-        .slot__outer
-          .slot__inner
-            .slot__shadow
-              #reel.reel
+        .slot
+          .slot__outer
+            .slot__inner
+              .slot__shadow
+                #reel.reel
 
-        #sunburst.sunburst
-          img(src="~@images/sunburst.svg" alt="sunburst")
+          #sunburst.sunburst
+            img(src="~@images/sunburst.svg" alt="sunburst")
+            
+      .slot-group
+        .slot-text
+          p Style
+
+        .slot
+          .slot__outer
+            .slot__inner
+              .slot__shadow
+                #reel.reel
+
+          #sunburst.sunburst
+            img(src="~@images/sunburst.svg" alt="sunburst")
 
     button#draw-button.solid-button Run!
 

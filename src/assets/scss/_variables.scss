@@ -25,6 +25,26 @@ $title-margin-top: 1.75rem;
 $title-margin-bottom: 4.875rem;
 
 // reel
+//$reel-item-height: 7.5rem;
+
+// slot
+//$original-slot-width: 62.5rem;
+//$original-slot-height: 14.375rem;
+
+// Define the factor to make the slot smaller
+//$size-reduction-factor: 0.8; // Adjust this as needed
+
+// Calculate the new slot size
+/*$slot-width: $original-slot-width * $size-reduction-factor;
+$slot-height: $original-slot-height * $size-reduction-factor;
+
+$slot-border-radius: 1.25rem;
+$slot-border-width: 1.625rem;
+$slot-inner-padding: (
+    $slot-height - ($slot-border-width * 2) - $reel-item-height
+) / 2;*/
+
+// reel
 $reel-item-height: 7.5rem;
 
 // slot
