@@ -112,7 +112,7 @@
         font-size: 3.75rem;
         font-weight: bold;
         text-align: center;
-        line-height: $reel-item-height;
+        line-height: $reel-item-height * 0.8;
         color: $color-slot-text;
         text-overflow: ellipsis;
         overflow: hidden;
