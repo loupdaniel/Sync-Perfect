@@ -48,7 +48,6 @@ var SoundEffects_1 = require("@js/SoundEffects");
     var settingsContent = document.getElementById('settings-panel');
     var settingsSaveButton = document.getElementById('settings-save');
     var settingsCloseButton = document.getElementById('settings-close');
-    var sunburstSvg = document.getElementById('sunburst');
     var confettiCanvas = document.getElementById('confetti-canvas');
     var nameListTextArea = document.getElementById('name-list');
     var genreListTextArea = document.getElementById('genre-list');
@@ -63,7 +62,6 @@ var SoundEffects_1 = require("@js/SoundEffects");
         && settingsContent
         && settingsSaveButton
         && settingsCloseButton
-        && sunburstSvg
         && confettiCanvas
         && nameListTextArea
         && genreListTextArea
@@ -105,7 +103,6 @@ var SoundEffects_1 = require("@js/SoundEffects");
         if (confettiAnimationId) {
             window.cancelAnimationFrame(confettiAnimationId);
         }
-        sunburstSvg.style.display = 'none';
     };
     /**  Function to be trigger before spinning */
     var onSpinStart = function () {
@@ -120,7 +117,6 @@ var SoundEffects_1 = require("@js/SoundEffects");
             switch (_a.label) {
                 case 0:
                     confettiAnimation();
-                    sunburstSvg.style.display = 'block';
                     return [4 /*yield*/, soundEffects.win()];
                 case 1:
                     _a.sent();
@@ -198,4 +194,3 @@ var SoundEffects_1 = require("@js/SoundEffects");
     // Click handler for "Discard and close" button for setting page
     settingsCloseButton.addEventListener('click', onSettingsClose);
 })();
-// 그냥 각 슬롯에 필요한 함수랑 오브젝트 더 추가하면 되나...?

@@ -11,7 +11,6 @@ import SoundEffects from '@js/SoundEffects';
   const settingsContent = document.getElementById('settings-panel') as HTMLDivElement | null;
   const settingsSaveButton = document.getElementById('settings-save') as HTMLButtonElement | null;
   const settingsCloseButton = document.getElementById('settings-close') as HTMLButtonElement | null;
-  const sunburstSvg = document.getElementById('sunburst') as HTMLImageElement | null;
   const confettiCanvas = document.getElementById('confetti-canvas') as HTMLCanvasElement | null;
   const nameListTextArea = document.getElementById('name-list') as HTMLTextAreaElement | null;
   const genreListTextArea = document.getElementById('genre-list') as HTMLTextAreaElement | null;
@@ -28,7 +27,6 @@ import SoundEffects from '@js/SoundEffects';
     && settingsContent
     && settingsSaveButton
     && settingsCloseButton
-    && sunburstSvg
     && confettiCanvas
     && nameListTextArea
     && genreListTextArea
@@ -78,7 +76,6 @@ import SoundEffects from '@js/SoundEffects';
     if (confettiAnimationId) {
       window.cancelAnimationFrame(confettiAnimationId);
     }
-    sunburstSvg.style.display = 'none';
   };
 
   /**  Function to be trigger before spinning */
@@ -92,7 +89,6 @@ import SoundEffects from '@js/SoundEffects';
   /**  Functions to be trigger after spinning */
   const onSpinEnd = async () => {
     confettiAnimation();
-    sunburstSvg.style.display = 'block';
     await soundEffects.win();
     drawButton.disabled = false;
     settingsButton.disabled = false;
@@ -176,5 +172,3 @@ import SoundEffects from '@js/SoundEffects';
   // Click handler for "Discard and close" button for setting page
   settingsCloseButton.addEventListener('click', onSettingsClose);
 })();
-
-// 그냥 각 슬롯에 필요한 함수랑 오브젝트 더 추가하면 되나...?
