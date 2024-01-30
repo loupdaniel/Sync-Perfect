@@ -122,6 +122,42 @@
       }
     }
 
+    #genrereel {
+      width: 100%;
+
+      > div {
+        height: $reel-item-height;
+        font-size: 3.75rem;
+        font-weight: bold;
+        text-align: center;
+        line-height: $reel-item-height * 0.8;
+        color: $color-slot-text;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        /* enable gpu accelaration to fix iOS flicker issue */
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    #stylereel {
+      width: 100%;
+
+      > div {
+        height: $reel-item-height;
+        font-size: 3.75rem;
+        font-weight: bold;
+        text-align: center;
+        line-height: $reel-item-height * 0.8;
+        color: $color-slot-text;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        /* enable gpu accelaration to fix iOS flicker issue */
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
     #sunburst {
       position: absolute;
       top: 50%;
@@ -202,6 +238,42 @@
 }
 
 .reel {
+  width: 100%;
+
+  > div {
+    height: $reel-item-height;
+    font-size: 3.75rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: $reel-item-height;
+    color: $color-slot-text;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    /* enable gpu accelaration to fix iOS flicker issue */
+    transform: translate3d(0, 0, 0);
+  } //Where the item shows up
+}
+
+.genrereel {
+  width: 100%;
+
+  > div {
+    height: $reel-item-height;
+    font-size: 3.75rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: $reel-item-height;
+    color: $color-slot-text;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    /* enable gpu accelaration to fix iOS flicker issue */
+    transform: translate3d(0, 0, 0);
+  } //Where the item shows up
+}
+
+.stylereel {
   width: 100%;
 
   > div {

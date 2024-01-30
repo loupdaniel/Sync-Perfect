@@ -5,6 +5,10 @@ interface SlotConfigurations {
   removeWinner?: boolean;
   /** User configuration for element selector which reel items should append to */
   reelContainerSelector: string;
+
+  reelGenreContainerSelector: string;
+
+  reelStyleContainerSelector: string;
   /** User configuration for callback function that runs before spinning reel */
   onSpinStart?: () => void;
   /** User configuration for callback function that runs after spinning reel */
@@ -19,11 +23,19 @@ export default class Slot {
   /** List of names to draw from */
   private nameList: string[];
 
+  private genreList: string[];
+
+  private styleList: string[];
+
   /** Whether there is a previous winner element displayed in reel */
   private havePreviousWinner: boolean;
 
   /** Container that hold the reel items */
   private reelContainer: HTMLElement | null;
+
+  private reelGenreContainer: HTMLElement | null;
+
+  private reelStyleContainer: HTMLElement | null;
 
   /** Maximum item inside a reel */
   private maxReelItems: NonNullable<SlotConfigurations['maxReelItems']>;
@@ -33,6 +45,28 @@ export default class Slot {
 
   /** Reel animation object instance */
   private reelAnimation?: Animation;
+
+  private reelGenreAnimation?: Animation;
+
+  private reelStyleAnimation?: Animation;
+
+  private createReelAnimation(container: HTMLElement | null): Animation | undefined {
+    return container?.animate(
+      [
+        { transform: 'none', filter: 'blur(0)' },
+        { filter: 'blur(1px)', offset: 0.5 },
+        // Here we transform the reel to move up and stop at the top of last item
+        // "(Number of item - 1) * height of reel item" of wheel is the amount of pixel to move up
+        // 7.5rem * 16 = 120px, which equals to reel item height
+        { transform: `translateY(-${(this.maxReelItems - 1) * (7.5 * 16)}px)`, filter: 'blur(0)' }
+      ],
+      {
+        duration: this.maxReelItems * 100, // 100ms for 1 item
+        easing: 'ease-in-out',
+        iterations: 1
+      }
+    );
+  }
 
   /** Callback function that runs before spinning reel */
   private onSpinStart?: NonNullable<SlotConfigurations['onSpinStart']>;
@@ -48,6 +82,8 @@ export default class Slot {
    * @param maxReelItems  Maximum item inside a reel
    * @param removeWinner  Whether winner should be removed from name list
    * @param reelContainerSelector  The element ID of reel items to be appended
+   * @param reelGenreContainerSelector
+   * @param reelStyleContainerSelector
    * @param onSpinStart  Callback function that runs before spinning reel
    * @param onNameListChanged  Callback function that runs when user updates the name list
    */
@@ -56,38 +92,30 @@ export default class Slot {
       maxReelItems = 30,
       removeWinner = true,
       reelContainerSelector,
+      reelGenreContainerSelector,
+      reelStyleContainerSelector,
       onSpinStart,
       onSpinEnd,
       onNameListChanged
     }: SlotConfigurations
   ) {
     this.nameList = [];
+    this.genreList = [];
+    this.styleList = [];
     this.havePreviousWinner = false;
     this.reelContainer = document.querySelector(reelContainerSelector);
+    this.reelGenreContainer = document.querySelector(reelGenreContainerSelector);
+    this.reelStyleContainer = document.querySelector(reelStyleContainerSelector);
     this.maxReelItems = maxReelItems;
     this.shouldRemoveWinner = removeWinner;
     this.onSpinStart = onSpinStart;
     this.onSpinEnd = onSpinEnd;
     this.onNameListChanged = onNameListChanged;
 
-    // Create reel animation
-    this.reelAnimation = this.reelContainer?.animate(
-      [
-        { transform: 'none', filter: 'blur(0)' },
-        { filter: 'blur(1px)', offset: 0.5 },
-        // Here we transform the reel to move up and stop at the top of last item
-        // "(Number of item - 1) * height of reel item" of wheel is the amount of pixel to move up
-        // 7.5rem * 16 = 120px, which equals to reel item height
-        { transform: `translateY(-${(this.maxReelItems - 1) * (7.5 * 16)}px)`, filter: 'blur(0)' }
-      ],
-      {
-        duration: this.maxReelItems * 100, // 100ms for 1 item
-        easing: 'ease-in-out',
-        iterations: 1
-      }
-    );
-
-    this.reelAnimation?.cancel();
+    // Separate animations for name, genre, and style
+    this.reelAnimation = this.createReelAnimation(this.reelContainer);
+    this.reelGenreAnimation = this.createReelAnimation(this.reelGenreContainer);
+    this.reelStyleAnimation = this.createReelAnimation(this.reelStyleContainer);
   }
 
   /**
@@ -114,6 +142,58 @@ export default class Slot {
   /** Getter for name list */
   get names(): string[] {
     return this.nameList;
+  }
+
+  /**
+   * Setter for name list
+   * @param genres  List of names to draw a winner from
+   */
+  set genres(genres: string[]) {
+    this.genreList = genres;
+
+    const reelItemsToRemove = this.reelGenreContainer?.children
+      ? Array.from(this.reelGenreContainer.children)
+      : [];
+
+    reelItemsToRemove
+      .forEach((element) => element.remove());
+
+    this.havePreviousWinner = false;
+
+    if (this.onNameListChanged) {
+      this.onNameListChanged();
+    }
+  }
+
+  /** Getter for name list */
+  get genres(): string[] {
+    return this.genreList;
+  }
+
+  /**
+   * Setter for name list
+   * @param styles  List of names to draw a winner from
+   */
+  set styles(styles: string[]) {
+    this.styleList = styles;
+
+    const reelItemsToRemove = this.reelStyleContainer?.children
+      ? Array.from(this.reelStyleContainer.children)
+      : [];
+
+    reelItemsToRemove
+      .forEach((element) => element.remove());
+
+    this.havePreviousWinner = false;
+
+    if (this.onNameListChanged) {
+      this.onNameListChanged();
+    }
+  }
+
+  /** Getter for name list */
+  get styles(): string[] {
+    return this.styleList;
   }
 
   /**
@@ -165,8 +245,18 @@ export default class Slot {
       this.onSpinStart();
     }
 
-    const { reelContainer, reelAnimation, shouldRemoveWinner } = this;
-    if (!reelContainer || !reelAnimation) {
+    const {
+      reelContainer,
+      reelGenreContainer,
+      reelStyleContainer,
+      reelAnimation,
+      reelGenreAnimation,
+      reelStyleAnimation,
+      shouldRemoveWinner
+    } = this;
+    if ((!reelContainer || !reelAnimation)
+      && (!reelGenreContainer || !reelGenreAnimation)
+      && (!reelStyleContainer || !reelStyleAnimation)) {
       return false;
     }
 
@@ -179,15 +269,47 @@ export default class Slot {
 
     randomNames = randomNames.slice(0, this.maxReelItems - Number(this.havePreviousWinner));
 
-    const fragment = document.createDocumentFragment();
+    // Shuffle names and create reel items
+    let randomGenres = Slot.shuffleNames<string>(this.genreList);
 
+    while (randomGenres.length && randomGenres.length < this.maxReelItems) {
+      randomGenres = [...randomGenres, ...randomGenres];
+    }
+
+    randomGenres = randomGenres.slice(0, this.maxReelItems - Number(this.havePreviousWinner));
+
+    // Shuffle names and create reel items
+    let randomStyles = Slot.shuffleNames<string>(this.styleList);
+
+    while (randomStyles.length && randomStyles.length < this.maxReelItems) {
+      randomStyles = [...randomStyles, ...randomStyles];
+    }
+
+    randomStyles = randomStyles.slice(0, this.maxReelItems - Number(this.havePreviousWinner));
+
+    const nameFragment = document.createDocumentFragment();
     randomNames.forEach((name) => {
       const newReelItem = document.createElement('div');
       newReelItem.innerHTML = name;
-      fragment.appendChild(newReelItem);
+      nameFragment.appendChild(newReelItem);
     });
+    reelContainer!.appendChild(nameFragment);
 
-    reelContainer.appendChild(fragment);
+    const genreFragment = document.createDocumentFragment();
+    randomGenres.forEach((genre) => {
+      const newGenreReelItem = document.createElement('div');
+      newGenreReelItem.innerHTML = genre;
+      genreFragment.appendChild(newGenreReelItem);
+    });
+    reelGenreContainer!.appendChild(genreFragment);
+
+    const styleFragment = document.createDocumentFragment();
+    randomStyles.forEach((style) => {
+      const newStyleReelItem = document.createElement('div');
+      newStyleReelItem.innerHTML = style;
+      styleFragment.appendChild(newStyleReelItem);
+    });
+    reelStyleContainer!.appendChild(styleFragment);
 
     console.log('Displayed items: ', randomNames);
     console.log('Winner: ', randomNames[randomNames.length - 1]);
@@ -197,25 +319,54 @@ export default class Slot {
       this.nameList.splice(this.nameList.findIndex(
         (name) => name === randomNames[randomNames.length - 1]
       ), 1);
+
+      this.genreList.splice(this.genreList.findIndex(
+        (genre) => genre === randomGenres[randomGenres.length - 1]
+      ), 1);
+
+      this.styleList.splice(this.styleList.findIndex(
+        (style) => style === randomStyles[randomStyles.length - 1]
+      ), 1);
     }
 
     console.log('Remaining: ', this.nameList);
 
     // Play the spin animation
-    const animationPromise = new Promise((resolve) => {
-      reelAnimation.onfinish = resolve;
-    });
+    const animationPromise = new Promise<void>((resolve) => {
+      const onAnimationFinish = () => {
+        reelAnimation?.removeEventListener('finish', onAnimationFinish);
+        reelGenreAnimation?.removeEventListener('finish', onAnimationFinish);
+        reelStyleAnimation?.removeEventListener('finish', onAnimationFinish);
+        resolve();
+      };
 
-    reelAnimation.play();
+      reelAnimation?.addEventListener('finish', onAnimationFinish);
+      reelGenreAnimation?.addEventListener('finish', onAnimationFinish);
+      reelStyleAnimation?.addEventListener('finish', onAnimationFinish);
+
+      reelAnimation?.play();
+      reelGenreAnimation?.play();
+      reelStyleAnimation?.play();
+    });
 
     await animationPromise;
 
     // Sets the current playback time to the end of the animation
-    // Fix issue for animatin not playing after the initial play on Safari
-    reelAnimation.finish();
+    // Fix issue for animation not playing after the initial play on Safari
+    reelAnimation?.finish();
+    reelGenreAnimation?.finish();
+    reelStyleAnimation?.finish();
 
-    Array.from(reelContainer.children)
-      .slice(0, reelContainer.children.length - 1)
+    Array.from(reelContainer!.children)
+      .slice(0, reelContainer!.children.length - 1)
+      .forEach((element) => element.remove());
+
+    Array.from(reelGenreContainer!.children)
+      .slice(0, reelGenreContainer!.children.length - 1)
+      .forEach((element) => element.remove());
+
+    Array.from(reelStyleContainer!.children)
+      .slice(0, reelStyleContainer!.children.length - 1)
       .forEach((element) => element.remove());
 
     this.havePreviousWinner = true;

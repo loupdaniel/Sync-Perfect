@@ -51,6 +51,8 @@ var SoundEffects_1 = require("@js/SoundEffects");
     var sunburstSvg = document.getElementById('sunburst');
     var confettiCanvas = document.getElementById('confetti-canvas');
     var nameListTextArea = document.getElementById('name-list');
+    var genreListTextArea = document.getElementById('genre-list');
+    var styleListTextArea = document.getElementById('style-list');
     var removeNameFromListCheckbox = document.getElementById('remove-from-list');
     var enableSoundCheckbox = document.getElementById('enable-sound');
     // Graceful exit if necessary elements are not found
@@ -64,6 +66,8 @@ var SoundEffects_1 = require("@js/SoundEffects");
         && sunburstSvg
         && confettiCanvas
         && nameListTextArea
+        && genreListTextArea
+        && styleListTextArea
         && removeNameFromListCheckbox
         && enableSoundCheckbox)) {
         console.error('One or more Element ID is invalid. This is possibly a bug.');
@@ -129,6 +133,8 @@ var SoundEffects_1 = require("@js/SoundEffects");
     /** Slot instance */
     var slot = new Slot_1["default"]({
         reelContainerSelector: '#reel',
+        reelGenreContainerSelector: '#genrereel',
+        reelStyleContainerSelector: '#stylereel',
         maxReelItems: MAX_REEL_ITEMS,
         onSpinStart: onSpinStart,
         onSpinEnd: onSpinEnd,
@@ -137,6 +143,8 @@ var SoundEffects_1 = require("@js/SoundEffects");
     /** To open the setting page */
     var onSettingsOpen = function () {
         nameListTextArea.value = slot.names.length ? slot.names.join('\n') : '';
+        genreListTextArea.value = slot.genres.length ? slot.genres.join('\n') : '';
+        styleListTextArea.value = slot.styles.length ? slot.styles.join('\n') : '';
         removeNameFromListCheckbox.checked = slot.shouldRemoveWinnerFromNameList;
         enableSoundCheckbox.checked = !soundEffects.mute;
         settingsWrapper.style.display = 'block';
@@ -177,6 +185,12 @@ var SoundEffects_1 = require("@js/SoundEffects");
         slot.names = nameListTextArea.value
             ? nameListTextArea.value.split(/\n/).filter(function (name) { return Boolean(name.trim()); })
             : [];
+        slot.genres = nameListTextArea.value
+            ? genreListTextArea.value.split(/\n/).filter(function (name) { return Boolean(name.trim()); })
+            : [];
+        slot.styles = nameListTextArea.value
+            ? styleListTextArea.value.split(/\n/).filter(function (name) { return Boolean(name.trim()); })
+            : [];
         slot.shouldRemoveWinnerFromNameList = removeNameFromListCheckbox.checked;
         soundEffects.mute = !enableSoundCheckbox.checked;
         onSettingsClose();
@@ -184,3 +198,4 @@ var SoundEffects_1 = require("@js/SoundEffects");
     // Click handler for "Discard and close" button for setting page
     settingsCloseButton.addEventListener('click', onSettingsClose);
 })();
+// 그냥 각 슬롯에 필요한 함수랑 오브젝트 더 추가하면 되나...?

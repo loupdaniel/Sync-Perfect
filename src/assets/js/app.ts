@@ -14,6 +14,8 @@ import SoundEffects from '@js/SoundEffects';
   const sunburstSvg = document.getElementById('sunburst') as HTMLImageElement | null;
   const confettiCanvas = document.getElementById('confetti-canvas') as HTMLCanvasElement | null;
   const nameListTextArea = document.getElementById('name-list') as HTMLTextAreaElement | null;
+  const genreListTextArea = document.getElementById('genre-list') as HTMLTextAreaElement | null;
+  const styleListTextArea = document.getElementById('style-list') as HTMLTextAreaElement | null;
   const removeNameFromListCheckbox = document.getElementById('remove-from-list') as HTMLInputElement | null;
   const enableSoundCheckbox = document.getElementById('enable-sound') as HTMLInputElement | null;
 
@@ -29,6 +31,8 @@ import SoundEffects from '@js/SoundEffects';
     && sunburstSvg
     && confettiCanvas
     && nameListTextArea
+    && genreListTextArea
+    && styleListTextArea
     && removeNameFromListCheckbox
     && enableSoundCheckbox
   )) {
@@ -97,6 +101,8 @@ import SoundEffects from '@js/SoundEffects';
   /** Slot instance */
   const slot = new Slot({
     reelContainerSelector: '#reel',
+    reelGenreContainerSelector: '#genrereel', // 검토
+    reelStyleContainerSelector: '#stylereel', // 검토
     maxReelItems: MAX_REEL_ITEMS,
     onSpinStart,
     onSpinEnd,
@@ -106,6 +112,8 @@ import SoundEffects from '@js/SoundEffects';
   /** To open the setting page */
   const onSettingsOpen = () => {
     nameListTextArea.value = slot.names.length ? slot.names.join('\n') : '';
+    genreListTextArea.value = slot.genres.length ? slot.genres.join('\n') : '';
+    styleListTextArea.value = slot.styles.length ? slot.styles.join('\n') : '';
     removeNameFromListCheckbox.checked = slot.shouldRemoveWinnerFromNameList;
     enableSoundCheckbox.checked = !soundEffects.mute;
     settingsWrapper.style.display = 'block';
@@ -154,6 +162,12 @@ import SoundEffects from '@js/SoundEffects';
     slot.names = nameListTextArea.value
       ? nameListTextArea.value.split(/\n/).filter((name) => Boolean(name.trim()))
       : [];
+    slot.genres = nameListTextArea.value
+      ? genreListTextArea.value.split(/\n/).filter((name) => Boolean(name.trim()))
+      : [];
+    slot.styles = nameListTextArea.value
+      ? styleListTextArea.value.split(/\n/).filter((name) => Boolean(name.trim()))
+      : [];
     slot.shouldRemoveWinnerFromNameList = removeNameFromListCheckbox.checked;
     soundEffects.mute = !enableSoundCheckbox.checked;
     onSettingsClose();
@@ -162,3 +176,5 @@ import SoundEffects from '@js/SoundEffects';
   // Click handler for "Discard and close" button for setting page
   settingsCloseButton.addEventListener('click', onSettingsClose);
 })();
+
+// 그냥 각 슬롯에 필요한 함수랑 오브젝트 더 추가하면 되나...?
