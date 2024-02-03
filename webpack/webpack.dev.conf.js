@@ -43,7 +43,7 @@ module.exports = merge(baseWebpackConfig, {
       }
     },
     allowedHosts: [
-      '.ngrok.io'
+      '.ngrok-free.app'
     ]
   },
   plugins: [
