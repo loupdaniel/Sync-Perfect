@@ -39,7 +39,7 @@ jobs:
         if: always()
         uses: ataylorme/eslint-annotate-action@v2
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.TOKEN }}
           report-json: ${{ env.TEST_REPORT_ESLINT_FOLDER }}/${{ env.TEST_REPORT_ESLINT_FILENAME }}
           only-pr-files: false
       - name: Preserve lint report as artifact
