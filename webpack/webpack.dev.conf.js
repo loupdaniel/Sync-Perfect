@@ -42,7 +42,9 @@ module.exports = merge(baseWebpackConfig, {
         errors: true
       }
     },
-    allowedHosts: "all"
+    allowedHosts: [
+      '.netlify.app'
+    ]
   },
   plugins: [
     new Webpack.DefinePlugin(clientEnv.stringified)
