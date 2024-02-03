@@ -43,7 +43,7 @@ module.exports = merge(baseWebpackConfig, {
       }
     },
     allowedHosts: [
-      '.netlify.app'
+      '.ngrok.io'
     ]
   },
   plugins: [
