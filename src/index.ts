@@ -2,7 +2,9 @@
 import 'core-js/stable';
 import 'web-animations-js/web-animations.min';
 import 'element-remove-polyfill';
-
+import { inject } from '@vercel/analytics';
+ 
+inject();
 // styles
 import '@styles/index.scss';
 
