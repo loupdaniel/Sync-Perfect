@@ -33,8 +33,16 @@ module.exports = merge(baseWebpackConfig, {
     chunkFilename: 'assets/js/[name].chunk.js'
   },
   devServer: {
-    comepress: true,
-    public: 'fb97-175-120-159-225.ngrok-free.app'
+    host: '0.0.0.0',
+    port: 8888,
+    watchFiles: ['src/**/*'],
+    client: {
+      overlay: {
+        warnings: false,
+        errors: true
+      }
+    },
+    allowedHosts: "all"
   },
   plugins: [
     new Webpack.DefinePlugin(clientEnv.stringified)
