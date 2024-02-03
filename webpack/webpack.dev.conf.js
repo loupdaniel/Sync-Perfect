@@ -43,7 +43,8 @@ module.exports = merge(baseWebpackConfig, {
       }
     },
     allowedHosts: [
-      '.ngrok-free.app'
+      '.ngrok-free.app',
+      '.vercel.app'
     ],
     disableHostCheck: true
   },
