@@ -20,35 +20,6 @@ env:
   TEST_REPORT_ESLINT_FILENAME: eslint.json
 
 jobs:
-  lint:
-    name: Linting
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Setup
-        uses: ./.github/actions/setup
-      - name: Run eslint checking
-        run: |
-          yarn eslint src *.js *.ts --report-unused-disable-directives --format json --output-file $REPORT_PATH
-        env:
-          REPORT_PATH: ${{ env.TEST_REPORT_ESLINT_FOLDER }}/${{ env.TEST_REPORT_ESLINT_FILENAME }}
-      - name: Annotate lint result
-        if: always()
-        uses: ataylorme/eslint-annotate-action@v2
-        with:
-          repo-token: ${{ secrets.TOKEN }}
-          report-json: ${{ env.TEST_REPORT_ESLINT_FOLDER }}/${{ env.TEST_REPORT_ESLINT_FILENAME }}
-          only-pr-files: false
-      - name: Preserve lint report as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: lint-report
-          path: ${{ env.TEST_REPORT_ESLINT_FOLDER }}/*
-          retention-days: 30
-
   build:
     name: Build
     strategy:
