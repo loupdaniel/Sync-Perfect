@@ -44,7 +44,8 @@ module.exports = merge(baseWebpackConfig, {
     },
     allowedHosts: [
       '.ngrok-free.app'
-    ]
+    ],
+    disableHostCheck: true
   },
   plugins: [
     new Webpack.DefinePlugin(clientEnv.stringified)
