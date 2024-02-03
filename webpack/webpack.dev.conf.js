@@ -41,7 +41,8 @@ module.exports = merge(baseWebpackConfig, {
         warnings: false,
         errors: true
       }
-    }
+    },
+    allowedHosts: "all"
   },
   plugins: [
     new Webpack.DefinePlugin(clientEnv.stringified)
