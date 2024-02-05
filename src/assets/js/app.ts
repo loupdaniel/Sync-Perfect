@@ -97,8 +97,8 @@ import SoundEffects from '@js/SoundEffects';
   /** Slot instance */
   const slot = new Slot({
     reelContainerSelector: '#reel',
-    reelGenreContainerSelector: '#genrereel', // 검토
-    reelStyleContainerSelector: '#stylereel', // 검토
+    reelGenreContainerSelector: '#genrereel',
+    reelStyleContainerSelector: '#stylereel',
     maxReelItems: MAX_REEL_ITEMS,
     onSpinStart,
     onSpinEnd,
