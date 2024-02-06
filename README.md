@@ -1,9 +1,9 @@
 <p align="center">
-    <img alt="Charming Jo Youtube Channel Logo" src="./logo.svg" width="100" />
+    <img alt="Charming Jo Youtube Channel Logo" src="./Charming Jo Logo.png" width="100" />
 </p>
-<h1 align="center">Name</h1>
+<h1 align="center">Sync Perfect</h1>
 <p align="center">
-    Description
+    Simple HTML5 roulette for picking song title, genre, style using Web Animations and AudioContext API
 </p>
 
 <p align="center">
