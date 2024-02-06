@@ -1,3 +1,9 @@
+.solid-button-box {
+  position: relative; /* set the position to relative */
+  bottom: 20px; /* move the element 50 pixels down from its normal position */
+  height: 20%;
+}
+
 .solid-button {
   display: inline-block;
   border: none;
