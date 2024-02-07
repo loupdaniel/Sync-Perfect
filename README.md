@@ -3,7 +3,7 @@
 </p>
 <h1 align="center">Sync Perfect</h1>
 <p align="center">
-    Simple HTML5 roulette for picking song title, genre, style using Web Animations and AudioContext API
+    Simple HTML5 roulette for picking song title, genre, and style using Web Animations and AudioContext API
 </p>
 
 <p align="center">
