@@ -19,6 +19,10 @@
 ## Live Demo
 Demo is available at [https://sync-perfect.vercel.app/](https://sync-perfect.vercel.app/)
 
+You can watch the video where this project was used, and uploaded on Charming Jo YouTube channel by clicking the image below.
+
+[<img src="https://i.ibb.co/KjWFwnS/2024-02-22-22-26-01-mp4-2024-02-22-10-31-04.png" alt="Charming Jo"/>](https://youtu.be/1fZmmgZLmRM?si=cfTN63QeQmYmlL2v)
+
 ### Technology Stack
 
 * Pug
