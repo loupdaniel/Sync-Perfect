@@ -21,7 +21,14 @@ Demo is available at [https://sync-perfect.vercel.app/](https://sync-perfect.ver
 
 You can watch the video where this project was used, and uploaded on Charming Jo YouTube channel by clicking the image below.
 
-[<img src="https://i.ibb.co/KjWFwnS/2024-02-22-22-26-01-mp4-2024-02-22-10-31-04.png" alt="Charming Jo"/>](https://youtu.be/1fZmmgZLmRM?si=cfTN63QeQmYmlL2v)
+<div style="display: flex; justify-content: center;">
+    <a href="https://youtu.be/1fZmmgZLmRM?si=cfTN63QeQmYmlL2v">
+        <img src="https://i.ibb.co/KjWFwnS/2024-02-22-22-26-01-mp4-2024-02-22-10-31-04.png" alt="Charming Jo 1" width="500"/>
+    </a>
+    <a href="https://youtu.be/1fZmmgZLmRM?si=cfTN63QeQmYmlL2v">
+        <img src="https://i.ibb.co/1mvgcHz/2024-02-25-8-47-10.png" alt="Charming Jo 2" width="500"/>
+    </a>
+</div>
 
 ### Technology Stack
 
