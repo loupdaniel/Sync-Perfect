@@ -23,10 +23,10 @@ You can watch the video where this project was used, and uploaded on Charming Jo
 
 <div style="display: flex; justify-content: center;">
     <a href="https://youtu.be/1fZmmgZLmRM?si=cfTN63QeQmYmlL2v">
-        <img src="https://i.ibb.co/KjWFwnS/2024-02-22-22-26-01-mp4-2024-02-22-10-31-04.png" alt="Charming Jo 1" width="500"/>
+        <img src="https://i.ibb.co/KjWFwnS/2024-02-22-22-26-01-mp4-2024-02-22-10-31-04.png" alt="Charming Jo 1" width="475"/>
     </a>
     <a href="https://youtu.be/1fZmmgZLmRM?si=cfTN63QeQmYmlL2v">
-        <img src="https://i.ibb.co/1mvgcHz/2024-02-25-8-47-10.png" alt="Charming Jo 2" width="500"/>
+        <img src="https://i.ibb.co/1mvgcHz/2024-02-25-8-47-10.png" alt="Charming Jo 2" width="475"/>
     </a>
 </div>
 
